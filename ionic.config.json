@@ -1,0 +1,7 @@
+{
+  "name": "ghomala-hybrid",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
