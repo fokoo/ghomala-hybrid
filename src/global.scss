@@ -35,3 +35,25 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* Professional Responsive Container */
+ion-content {
+  --background: #efebe9; // Earthy background
+  
+  &::part(scroll) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+// This centers the content on Web and keeps it full-width on Mobile
+.container-responsive {
+  width: 100%;
+  max-width: 600px; // The "Sweet Spot" for translation apps
+  margin: 0 auto;
+}
+
+body {
+  background-color: #efebe9;
+}
