@@ -1,4 +1,3 @@
-
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-title class="brand-title">Ghɔmala'</ion-title>
@@ -80,48 +79,48 @@
 
       @if (showSpecialChars()) {
         <div class="char-popup">
-          @for (c of ['ɑ̀', 'ǐ', 'ǒ', 'ʉ', 'p̌', 'ŋ']; track c) {
-            <div (click)="addChar(c)" class="char-key">{{c}}</div>
-          }
+          <div class="char-grid">
+            @for (c of ['ə', 'ɔ', 'ʉ', 'ŋ', 'ɑ', 'i', 'o', 'm','`','´', '^', ' ̌']; track c) {
+              <div (click)="addChar(c)" class="char-key">{{c}}</div>
+            }
+          </div>
         </div>
       }
     </div>
 
-   
     @if (outputText()) {
-  <div class="result-container">
-    <div class="result-display-modern">
-      <div class="result-top">
-        <ion-badge color="primary">{{ targetLang() | uppercase }}</ion-badge>
-        
-        <div class="result-tools">
-          <ion-button fill="clear" (click)="copyToClipboard(outputText())">
-            <ion-icon name="copy-outline" slot="icon-only"></ion-icon>
-          </ion-button>
-          
-          <ion-button fill="clear" (click)="ai.speak(outputText(), targetLang())">
-            <ion-icon name="volume-high-outline" slot="icon-only"></ion-icon>
-          </ion-button>
-        </div>
-      </div>
-      
-      <p class="output-text">{{ outputText() }}</p>
+      <div class="result-container">
+        <div class="result-display-modern">
+  <div class="result-top">
+    <ion-badge color="primary">{{ targetLang() | uppercase }}</ion-badge>
+    <div class="result-tools">
+      <ion-button fill="clear" (click)="copyToClipboard(outputText())">
+        <ion-icon name="copy-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="ai.speak(outputText(), targetLang())">
+        <ion-icon name="volume-high-outline" slot="icon-only"></ion-icon>
+      </ion-button>
     </div>
+  </div>
+  <p class="output-text">{{ outputText() }}</p>
+</div>
 
-    <div class="dictionary-display">
-      <h3 class="dict-title">Vocabulary</h3>
-      <div class="dict-scroll">
-        @for (word of dictionaryResults(); track word.ghomala) {
-          <div class="dict-item">
-            <span class="dict-ghomala">{{ word.ghomala }}</span>
-            <span class="dict-sep">:</span>
-            <span class="dict-target">{{ word.translation }}</span>
+        @if (dictionaryResults().length > 0) {
+          <div class="dictionary-display chrome-render-fix">
+            <h3 class="dict-title">Vocabulary</h3>
+            <div class="dict-scroll">
+              @for (word of dictionaryResults(); track $index) {
+                <div class="dict-item">
+                  <span class="dict-ghomala">{{ word.ghomala }}</span>
+                  <span class="dict-sep">:</span>
+                  <span class="dict-target">{{ word.translation }}</span>
+                </div>
+              }
+            </div>
           </div>
         }
       </div>
-    </div>
-  </div>
-}
+    }
 
     <ion-modal trigger="open-history" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5, 0.8]" mode="ios">
       <ng-template>
@@ -139,7 +138,7 @@
           @if (history().length === 0) {
             <div class="empty-state">No recent translations</div>
           } @else {
-            @for (item of history(); track item) {
+            @for (item of history(); track $index) {
               <div class="history-card">
                 <div class="h-input">{{ item.input }}</div>
                 <div class="h-output">{{ item.output }}</div>

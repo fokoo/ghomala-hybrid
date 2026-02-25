@@ -33,8 +33,8 @@ export class Tab1Page {
   isAutoTranslate = signal(false); // Toggle for Auto-Translate
   showSpecialChars = signal(false); // New signal for character bar
   dictionaryResults = signal<{ghomala: string, translation: string}[]>([]);
-  specialChars = ['ɑ', 'i', 'o', 'ʉ', 'm', 'ŋ', '`','´', '^', 'ɔ', ' ̌']; 
-  
+  specialChars = [ 'ə', 'ɔ', 'ʉ', 'ŋ', 'ɑ', 'i', 'o', 'm','`','´', '^', ' ̌']; 
+
  constructor() {
     // Register icons for Standalone mode
     addIcons({
