@@ -1,7 +1,10 @@
 
-.brand-title {
-  font-weight: 800;
-  letter-spacing: 0.5px;
+/* Adaptive container: Full width on mobile, max 800px on desktop */
+.responsive-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 30px;
 }
 
 .section-title {
@@ -10,102 +13,68 @@
   letter-spacing: 1.2px;
   color: #8d6e63;
   font-weight: 800;
-  margin: 20px 0 10px 4px;
+  margin: 25px 16px 10px;
 }
 
-/* Horizontal Chip Scroll */
-.topic-scroll {
-  display: flex;
-  overflow-x: auto;
-  gap: 4px;
-  padding-bottom: 10px;
-  &::-webkit-scrollbar { display: none; }
+/* Make the category selector span the full width */
+.select-box {
+  background: white;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
   
-  ion-chip {
-    margin: 0;
+  ion-item {
+    --background: transparent;
+    --padding-start: 16px;
     font-weight: 600;
   }
 }
 
-/* Keyword Cards Grid */
-.keyword-container {
-  min-height: 150px;
-}
-
-.keyword-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.keyword-card {
-  background: white;
-  padding: 16px;
-  border-radius: 12px;
+/* WIDE LIST LAYOUT - Edge-to-edge content */
+.full-width-list {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-  border: 1px solid #eee;
-  transition: 0.2s;
+  background: white;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
 
-  &:active {
-    transform: scale(0.97);
-    background: #fafafa;
-  }
+.keyword-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  
+  &:last-child { border-bottom: none; }
+  &:active { background: #fafafa; }
 
   .word-ghomala {
+    display: block;
     font-weight: 800;
-    color: #5d4037;
-    font-size: 1.15rem;
-    margin-bottom: 2px;
+    color: #333;
+    font-size: 1.3rem;
   }
   .word-translation {
-    font-size: 0.8rem;
-    color: #888;
-    font-weight: 500;
+    font-size: 0.95rem;
+    color: #777;
   }
 }
 
-/* Links Section */
-.glass-list {
+/* Useful Links List */
+.wide-link-list {
   background: white;
-  border-radius: 14px;
-  padding: 4px;
-  border: 1px solid #e0e0e0;
-
-  .link-item {
-    --padding-start: 12px;
-    --background-hover: #fcfaf9;
-    
-    h2 { font-size: 0.95rem; font-weight: 700; color: #333; }
-    p { font-size: 0.75rem; color: #777; }
-    
-    ion-icon[slot="start"] {
-      font-size: 1.4rem;
-      margin-right: 16px;
-    }
-    
-    .open-icon {
-      font-size: 0.9rem;
-      color: #ccc;
-    }
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  
+  ion-item {
+    --padding-start: 16px;
+    h2 { font-weight: 700; color: #444; }
   }
 }
 
 .more-container {
   display: flex;
   justify-content: center;
-  margin-top: 5px;
-  ion-button {
-    --color: #8d6e63;
-    font-weight: 700;
-    font-size: 0.8rem;
-  }
-}
-
-.empty-state {
-  text-align: center;
-  padding: 40px;
-  color: #bbb;
-  font-size: 0.9rem;
+  margin-top: 15px;
+  ion-button { --color: #8d6e63; font-weight: 700; }
 }
