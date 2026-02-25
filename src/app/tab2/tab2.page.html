@@ -1,17 +1,61 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title class="brand-title">Resources</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content color="light">
+  <div class="ion-padding">
+    
+    <h3 class="section-title">Topics</h3>
+    <div class="topic-scroll">
+      @for (topic of topics; track topic.id) {
+        <ion-chip 
+          [fill]="selectedTopic() === topic.id ? 'solid' : 'outline'" 
+          [color]="selectedTopic() === topic.id ? 'primary' : 'medium'"
+          (click)="selectedTopic.set(topic.id)">
+          <ion-label>{{ topic.name }}</ion-label>
+        </ion-chip>
+      }
+    </div>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <div class="keyword-container">
+      @if (filteredKeywords().length > 0) {
+        <div class="keyword-grid">
+          @for (item of filteredKeywords(); track item.word) {
+            <div class="keyword-card">
+              <span class="word-ghomala">{{ item.word }}</span>
+              <span class="word-translation">{{ item.translation }}</span>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="empty-state">No keywords found for this topic.</div>
+      }
+    </div>
+
+    <div class="links-section ion-margin-top">
+      <h3 class="section-title">Useful Links</h3>
+      <ion-list lines="none" class="glass-list">
+        @for (link of visibleLinks(); track link.label) {
+          <ion-item button (click)="openLink(link.url)" class="link-item">
+            <ion-icon [name]="link.icon" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <h2>{{ link.label }}</h2>
+              <p>{{ link.description }}</p>
+            </ion-label>
+            <ion-icon name="open-outline" slot="end" class="open-icon"></ion-icon>
+          </ion-item>
+        }
+      </ion-list>
+
+      <div class="more-container">
+        <ion-button fill="clear" size="small" (click)="showMoreLinks.set(!showMoreLinks())">
+          {{ showMoreLinks() ? 'Show Less' : 'View More' }}
+          <ion-icon [name]="showMoreLinks() ? 'chevron-up' : 'chevron-down'" slot="end"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+  </div>
 </ion-content>

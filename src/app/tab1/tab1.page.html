@@ -45,6 +45,14 @@
     </div>
 
     <div class="workspace-card white-bg">
+   <!--    <div class="input-tools-top">
+    @if (inputText()) {
+      <div class="clear-btn" (click)="inputText.set('')">
+        <span>CLEAR</span>
+        <ion-icon name="close-circle"></ion-icon>
+      </div>
+    }
+  </div> -->
       <ion-textarea 
         [value]="inputText()" 
         (ionInput)="inputText.set($event.detail.value!)" 
@@ -72,9 +80,19 @@
           </div>
         </div>
 
-        <div class="keyboard-trigger" (click)="toggleChars()" [class.active]="showSpecialChars()">
-          <ion-icon name="keypad-outline"></ion-icon>
-        </div>
+        <div class="right-group">
+          @if (inputText()) {
+          <div class="icon-btn-secondary" (click)="inputText.set('')" [class.disabled]="!inputText()">
+           <ion-icon name="close-outline"></ion-icon>
+         </div>
+          }
+      <div class="icon-btn-secondary" (click)="copyToClipboard(inputText())" [class.disabled]="!inputText()">
+        <ion-icon name="copy-outline"></ion-icon>
+      </div>
+      <div class="keyboard-trigger" (click)="toggleChars()">
+        <ion-icon name="keypad-outline"></ion-icon>
+      </div>
+    </div>
       </div>
 
       @if (showSpecialChars()) {

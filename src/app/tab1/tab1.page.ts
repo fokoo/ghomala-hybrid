@@ -9,7 +9,7 @@ import { Translation } from '../services/translation';
 import { addIcons } from 'ionicons';
 import { 
   swapHorizontalOutline, keypadOutline, keypad, flashOutline, 
-  flash, timeOutline, volumeHighOutline, trashOutline, copyOutline 
+  flash, timeOutline, volumeHighOutline, trashOutline, copyOutline, closeCircle 
 } from 'ionicons/icons';
 
 
@@ -46,7 +46,8 @@ export class Tab1Page {
       'time-outline': timeOutline,
       'volume-high-outline': volumeHighOutline,
       'trash-outline': trashOutline,
-      'copy-outline': copyOutline
+      'copy-outline': copyOutline,
+      'close-outline': closeCircle, // Example close icon
     });
 
     /**
@@ -178,8 +179,16 @@ export class Tab1Page {
   }
 
   addChar(char: string) {
-    this.inputText.update(v => v + char);
-  }
+  const currentText = this.inputText();
+  this.inputText.set(currentText + char);
+  
+  // Optional: Refocus the textarea after a short delay 
+  // so the user can keep typing immediately.
+  setTimeout(() => {
+    const el = document.querySelector('ion-textarea') as any;
+    if (el) el.setFocus();
+  }, 50);
+}
 
   clearHistory() {
     this.history.set([]);

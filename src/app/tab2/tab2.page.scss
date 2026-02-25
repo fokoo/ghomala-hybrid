@@ -1,0 +1,111 @@
+
+.brand-title {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.section-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #8d6e63;
+  font-weight: 800;
+  margin: 20px 0 10px 4px;
+}
+
+/* Horizontal Chip Scroll */
+.topic-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 4px;
+  padding-bottom: 10px;
+  &::-webkit-scrollbar { display: none; }
+  
+  ion-chip {
+    margin: 0;
+    font-weight: 600;
+  }
+}
+
+/* Keyword Cards Grid */
+.keyword-container {
+  min-height: 150px;
+}
+
+.keyword-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.keyword-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+  border: 1px solid #eee;
+  transition: 0.2s;
+
+  &:active {
+    transform: scale(0.97);
+    background: #fafafa;
+  }
+
+  .word-ghomala {
+    font-weight: 800;
+    color: #5d4037;
+    font-size: 1.15rem;
+    margin-bottom: 2px;
+  }
+  .word-translation {
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: 500;
+  }
+}
+
+/* Links Section */
+.glass-list {
+  background: white;
+  border-radius: 14px;
+  padding: 4px;
+  border: 1px solid #e0e0e0;
+
+  .link-item {
+    --padding-start: 12px;
+    --background-hover: #fcfaf9;
+    
+    h2 { font-size: 0.95rem; font-weight: 700; color: #333; }
+    p { font-size: 0.75rem; color: #777; }
+    
+    ion-icon[slot="start"] {
+      font-size: 1.4rem;
+      margin-right: 16px;
+    }
+    
+    .open-icon {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+  }
+}
+
+.more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  ion-button {
+    --color: #8d6e63;
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #bbb;
+  font-size: 0.9rem;
+}

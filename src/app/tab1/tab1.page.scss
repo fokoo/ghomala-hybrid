@@ -1,5 +1,5 @@
 
-/* --- GLOBAL & BROWSER FIXES --- */
+/* --- BROWSER STABILITY & CONTAINERS --- */
 .chrome-fix { 
   display: inline-block; 
   white-space: nowrap; 
@@ -10,7 +10,6 @@
   width: 100%;
   max-width: 100%;
   padding: 12px;
-  /* Prevent horizontal overflow bugs in Chrome */
   overflow-x: hidden; 
 }
 
@@ -19,18 +18,15 @@ ion-toolbar {
   --background: var(--ion-color-primary);
   ion-button {
     --color: white;
-    --padding-start: 8px;
-    --padding-end: 8px;
+    margin-right: 4px;
+    ion-icon { font-size: 1.4rem; }
   }
 }
 
-.code-select { 
-  --color: white; 
-  font-weight: 800; 
-  font-size: 0.9rem; 
-}
+.brand-title { font-weight: 800; letter-spacing: 0.5px; }
+.code-select { --color: white; font-weight: 800; font-size: 0.9rem; }
 
-/* --- LANGUAGE BAR --- */
+/* --- LANGUAGE SELECTION BAR --- */
 .lang-bar {
   margin-bottom: 15px;
   ion-select { font-weight: 700; color: #5d4037; width: 100%; }
@@ -42,7 +38,7 @@ ion-toolbar {
   color: #5d4037; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer;
 }
 
-/* --- WORKSPACE: NESTED CONTROLS --- */
+/* --- THE WORKSPACE CARD (TEXTAREA) --- */
 .workspace-card.white-bg {
   background: #ffffff !important;
   border-radius: 16px;
@@ -52,38 +48,43 @@ ion-toolbar {
   width: 100%;
   box-shadow: 0 4px 15px rgba(0,0,0,0.03);
   
-  /* CHROME FIX: Create a stacking context */
+  /* Chrome Fix: Force stacking context */
   z-index: 1;
   transform: translateZ(0); 
 
   .main-textarea {
     --background: transparent;
     --color: #111;
-    --padding-bottom: 75px;
+    --padding-top: 10px;
+    --padding-bottom: 70px; /* Space for the bottom controls */
     font-size: 1.4rem;
     line-height: 1.5;
     min-height: 220px;
   }
 }
 
+/* --- NESTED CONTROLS (BOTTOM ROW) --- */
 .nested-controls {
   position: absolute; 
   bottom: 12px; left: 12px; right: 12px;
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
   z-index: 10; 
-  pointer-events: none; 
+  pointer-events: none; /* Allows click-through to textarea gap */
 
-  .left-group, .keyboard-trigger {
-    pointer-events: auto; 
+  .left-group, .right-group {
+    pointer-events: auto; /* Re-enables interaction for buttons */
     display: flex; 
-    gap: 8px;
+    gap: 6px;
+    align-items: center;
   }
 }
 
-/* --- MINI BUTTONS --- */
+/* Bottom Left: Tutə & Auto */
 .mini-btn-main {
   background: linear-gradient(135deg, #5d4037 0%, #3e2723 100%);
-  color: white; padding: 10px 22px; border-radius: 10px;
+  color: white; padding: 10px 20px; border-radius: 10px;
   font-weight: 800; text-transform: uppercase; cursor: pointer;
   box-shadow: 0 4px 10px rgba(93, 64, 55, 0.2); transition: 0.2s;
 
@@ -102,95 +103,92 @@ ion-toolbar {
   &.active { background: #5d4037; color: white; }
 }
 
-.keyboard-trigger {
-  width: 44px; height: 44px; background: #f4f4f4; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center; color: #5d4037;
+/* Bottom Right: Clear, Copy & Keyboard Icons */
+.icon-btn-secondary, .keyboard-trigger {
+  width: 38px;
+  height: 38px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5d4037;
+  cursor: pointer;
+  transition: 0.2s;
+
   &.active { background: #5d4037; color: white; }
+  &.disabled { opacity: 0.3; pointer-events: none; }
+  &:active { transform: scale(0.92); background: #e0e0e0; }
+
+  ion-icon { font-size: 1.25rem; }
 }
 
-/* --- CHROME FIX: SPECIAL CHARACTER POPUP --- */
+/* --- SPECIAL CHARACTER POPUP --- */
 .char-popup {
   position: absolute; 
-  bottom: 75px; 
-  right: 12px; 
+  bottom: 65px; right: 12px; 
   background: #ffffff !important; 
-  border: 1px solid #d7ccc8; 
-  border-radius: 12px; 
-  padding: 12px; 
-  box-shadow: 0 12px 35px rgba(0,0,0,0.2); 
-  
-  /* Force high priority rendering in Chrome */
+  border: 1px solid #d7ccc8; border-radius: 12px; 
+  padding: 12px; box-shadow: 0 12px 35px rgba(0,0,0,0.2); 
   z-index: 9999 !important; 
-  display: block !important;
-  visibility: visible !important;
   transform: translateZ(50px); 
-  will-change: transform, opacity;
 
   .char-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    width: 200px;
+    gap: 8px;
+    width: 190px;
   }
 
   .char-key {
-    height: 44px; display: flex; align-items: center; justify-content: center;
-    background: #fdfaf9; border-radius: 8px; font-weight: bold; font-size: 1.25rem;
+    height: 42px; display: flex; align-items: center; justify-content: center;
+    background: #fdfaf9; border-radius: 6px; font-weight: bold; font-size: 1.2rem;
     color: #3e2723; cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     &:active { background: #d7ccc8; }
   }
 }
 
-/* --- OUTPUT & DICTIONARY LAYOUT --- */
+/* --- OUTPUT & DICTIONARY --- */
 .result-container {
   display: flex; flex-direction: column; gap: 15px; margin-top: 25px; width: 100%;
-  /* Force layout refresh in Chrome */
-  contain: layout; 
-  
   @media (min-width: 768px) { flex-direction: row; align-items: flex-start; }
 }
 
-/* Translated Text Box */
 .result-display-modern {
   flex: 1.5; background: #fcfaf9; border-radius: 12px; padding: 20px; border-left: 10px solid #5d4037;
   transform: translateZ(0); 
 
   .result-top {
     display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
-    .result-tools { display: flex; gap: 10px; ion-button { --color: #5d4037; margin: 0; } }
+    .result-tools { 
+      display: flex; 
+      gap: 12px; 
+      ion-button { --color: #5d4037; margin: 0; height: 38px; width: 38px; } 
+    }
   }
 
   .output-text {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #000000 !important; /* Fix for Chrome "ghost" text */
-    margin: 0;
+    font-size: 1.8rem; font-weight: 600; color: #000000 !important;
     display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
+    line-height: 1.3;
   }
 }
 
-/* Vocabulary Box */
 .dictionary-display.chrome-render-fix {
   display: block !important;
   flex: 1; background: #ffffff; border-radius: 12px; padding: 18px; border: 1px solid #e0e0e0;
-  min-width: 250px;
   transform: translateZ(0);
 
   .dict-title { font-size: 0.85rem; text-transform: uppercase; color: #8d6e63; font-weight: 800; border-bottom: 1px solid #eee; margin-bottom: 12px; padding-bottom: 6px; }
-  .dict-item { display: flex; padding: 10px 0; border-bottom: 1px dashed #f0f0f0; }
+  .dict-item { display: flex; padding: 8px 0; border-bottom: 1px dashed #f0f0f0; }
   .dict-ghomala { font-weight: 700; color: #5d4037; font-size: 1.1rem; }
   .dict-sep { margin: 0 10px; color: #ccc; }
   .dict-target { color: #333; }
 }
 
-/* --- HISTORY MODAL --- */
+/* --- MODAL HISTORY --- */
 .history-card {
   background: #f8f9fa; padding: 16px; border-radius: 12px; margin-bottom: 12px; border: 1px solid #efefef;
   .h-input { font-size: 0.95rem; color: #8d6e63; }
   .h-output { font-size: 1.25rem; font-weight: 700; color: #333; }
 }
-
-.empty-state { text-align: center; padding: 40px; color: #a1887f; }
