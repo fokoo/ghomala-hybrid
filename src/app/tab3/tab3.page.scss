@@ -102,11 +102,19 @@ ion-title {
 // 5. Modal Styling
 .info-text-wrapper {
   padding: 10px;
-  h2 { font-size: 2rem; font-weight: 800; color: var(--ion-color-primary); margin-bottom: 5px; }
+  color: #1a1a1a !important; // Forces general text to near-black
+
+  p, li, span {
+    color: #444444 !important; // Forces paragraphs and lists to be dark grey
+  }
+
+  h2 { font-size: 2rem; font-weight: 800; 
+    color: var(--ion-color-primary) !important; 
+    margin-bottom: 5px; }
   .intro-text { font-style: italic; color: #666; margin-bottom: 20px; }
 
   .info-section {
-    background: #f9f9f9;
+    background: #ffffff !important; // Ensures background is white
     padding: 15px;
     border-radius: 12px;
     margin-bottom: 15px;
@@ -116,19 +124,23 @@ ion-title {
       align-items: center;
       gap: 10px;
       margin-bottom: 10px;
-      h3 { margin: 0; font-weight: 700; }
+      h3 { color: #333333 !important; 
+        margin: 0; font-weight: 700; }
     }
   }
 }
 
-.dialect-list {
+.dialect-list{
   list-style: none;
   padding: 0;
   li {
     padding: 10px 0;
     border-bottom: 1px dashed #ddd;
     font-size: 0.9rem;
-    strong { color: var(--ion-color-primary); display: block; }
+    color: #444444 !important; // Forces list items to be dark grey
+    strong { 
+      color: var(--ion-color-primary) !important; 
+      display: block; }
     &:last-child { border-bottom: none; }
   }
 }

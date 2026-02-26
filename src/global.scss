@@ -57,3 +57,13 @@ ion-content {
 body {
   background-color: #efebe9;
 }
+
+// In global.scss
+ion-modal {
+  --background: #ffffff;
+  --color: #000000;
+}
+
+.ion-page {
+  background-color: #ffffff;
+}

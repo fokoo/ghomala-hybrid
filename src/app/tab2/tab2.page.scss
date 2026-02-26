@@ -10,7 +10,7 @@
 
 .lang-select-header {
   --placeholder-color: white;
-  --color: white;
+  --color: white !important;
   font-weight: 700;
   font-size: 0.85rem;
   margin-right: 8px;
@@ -236,3 +236,36 @@ ion-segment {
   to { opacity: 1; transform: translateY(0); }
 }
 
+
+// If you have a category selector or searchbar text that is turning white:
+ion-searchbar {
+  --color: #000000 !important; // Forces search text to black
+  --placeholder-color: #666666 !important;
+}
+// If you have an ion-select for categories in the body:
+.category-select {
+ --color: #333333 !important;
+ color: #333333 !important;
+/*  --placeholder-color: #666 !important;
+  --color: #000000 !important; // Overall text color
+  background: #ffffff;
+  border-radius: 8px;
+  margin: 10px;
+  border: 1px solid #ddd;
+
+  /* This is the magic fix for Chrome's Shadow DOM */
+ /* &::part(text) {
+    color: #000000 !important;
+    opacity: 1 !important;
+  }
+
+  &::part(placeholder) {
+    color: #666666 !important;
+    opacity: 1;
+  }
+
+  &::part(icon) {
+    color: var(--ion-color-primary) !important;
+    opacity: 1;
+  } */
+}
