@@ -1,61 +1,133 @@
-
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-title style="font-weight: 800;">Resources</ion-title>
+    <ion-title style="font-weight: 800;">Ghómálá' Dico</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar color="primary">
+    <ion-segment [value]="appLanguage()" (ionChange)="updateLanguage($event)" mode="ios">
+      <ion-segment-button value="fr">
+        <ion-label>Français</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="en">
+        <ion-label>English</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-searchbar 
+      [placeholder]="appLanguage() === 'fr' ? 'Rechercher...' : 'Search...'" 
+      (ionInput)="handleSearch($event)"
+      class="custom-search">
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
   <div class="responsive-container">
     
-    <h3 class="section-title">Select a Category</h3>
+    <h3 class="section-title">
+      {{ appLanguage() === 'fr' ? 'Catégories' : 'Categories' }}
+    </h3>
     <div class="select-box">
       <ion-item lines="none">
-        <ion-icon name="list" slot="start" color="primary"></ion-icon>
+        <ion-icon name="app-list" slot="start" color="primary"></ion-icon>
         <ion-select 
           interface="popover" 
+          toggleIcon="app-down"
           [value]="selectedTopic()" 
           (ionChange)="selectedTopic.set($event.detail.value)">
           @for (topic of topics; track topic.id) {
-            <ion-select-option [value]="topic.id">{{ topic.name }}</ion-select-option>
+            <ion-select-option [value]="topic.id">
+              {{ topic.ghomala }} ({{ getTranslation(topic) }})
+            </ion-select-option>
           }
         </ion-select>
       </ion-item>
     </div>
 
-    <h3 class="section-title">Vocabulary</h3>
+    <h3 class="section-title">
+      {{ appLanguage() === 'fr' ? 'Vocabulaire' : 'Vocabulary' }}
+    </h3>
     <div class="full-width-list">
-      @for (item of filteredKeywords(); track item.word) {
-        <div class="keyword-row">
-          <div class="word-content">
-            <span class="word-ghomala">{{ item.word }}</span>
-            <span class="word-translation">{{ item.translation }}</span>
+      @for (item of filteredKeywords(); track item.word; let i = $index) {
+        <div class="keyword-container" [class.expanded]="expandedIndex() === i">
+          <div class="keyword-row" (click)="toggleExpand(i)">
+            <div class="word-content">
+              <span class="word-ghomala">{{ item.word }}</span>
+              <span class="word-translation">{{ getTranslation(item) }}</span>
+            </div>
+            
+            <div class="action-buttons">
+              <ion-button fill="clear" (click)="playAudio(item.word, $event)">
+                <ion-icon name="app-volume" slot="icon-only" color="primary"></ion-icon>
+              </ion-button>
+              <ion-icon 
+                [name]="expandedIndex() === i ? 'app-up' : 'app-down'" 
+                color="medium" 
+                style="margin-left: 10px;">
+              </ion-icon>
+            </div>
           </div>
-          <ion-icon name="chevron" color="medium"></ion-icon>
+
+          @if (expandedIndex() === i) {
+            <div class="example-box">
+              <p class="ex-gh"><strong>Ex:</strong> {{ item.ex_ghomala }}</p>
+              <p class="ex-trans">
+                {{ appLanguage() === 'fr' ? item.ex_fr : item.ex_en }}
+              </p>
+            </div>
+          }
+        </div>
+      } @empty {
+        <div class="empty-state">
+          <ion-icon name="app-search"></ion-icon>
+          <p>{{ appLanguage() === 'fr' ? 'Aucun résultat trouvé' : 'No results found' }}</p>
         </div>
       }
     </div>
 
-    <h3 class="section-title">Useful Links</h3>
-    <ion-list lines="full" class="wide-link-list">
-      @for (link of visibleLinks(); track link.label) {
-        <ion-item button (click)="openLink(link.url)">
-          <ion-icon [name]="link.icon" slot="start" color="primary"></ion-icon>
-          <ion-label>
-            <h2>{{ link.label }}</h2>
-            <p>{{ link.description }}</p>
-          </ion-label>
-          <ion-icon name="open" slot="end" size="small"></ion-icon>
-        </ion-item>
-      }
-    </ion-list>
+    <div class="youtube-section ion-margin-top">
+      <div class="youtube-card" (click)="openLink('https://youtube.com')">
+        <ion-icon name="app-youtube" color="danger"></ion-icon>
+        <div class="word-content">
+          <span class="yt-title">YouTube Channel</span>
+          <span class="yt-subtitle">
+            {{ appLanguage() === 'fr' ? 'Cours de Ghomala' : 'Ghomala lessons' }}
+          </span>
+        </div>
+        <ion-icon name="app-open" size="small" color="medium"></ion-icon>
+      </div>
+    </div>
 
     <div class="more-container">
-      <ion-button fill="clear" (click)="showMoreLinks.set(!showMoreLinks())">
-        {{ showMoreLinks() ? 'Show Less' : 'View More' }}
-        <ion-icon [name]="showMoreLinks() ? 'chevron-up' : 'chevron-down'" slot="end"></ion-icon>
+      <ion-button fill="outline" shape="round" color="medium" (click)="setOpen(true)">
+        <ion-icon name="app-link" slot="start"></ion-icon>
+        {{ appLanguage() === 'fr' ? 'Liens Utiles' : 'Useful Links' }}
       </ion-button>
     </div>
 
-  </div>
+  </div> <ion-modal [isOpen]="isModalOpen()" (didDismiss)="setOpen(false)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>{{ appLanguage() === 'fr' ? 'Liens Utiles' : 'Useful Links' }}</ion-title>
+          <ion-button slot="end" fill="clear" (click)="setOpen(false)" style="--color: white;">
+            {{ appLanguage() === 'fr' ? 'Fermer' : 'Close' }}
+          </ion-button>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content color="light">
+        <div class="full-width-list">
+          @for (link of otherLinks; track link.label) {
+            <div class="keyword-row" (click)="openLink(link.url)">
+              <div style="display: flex; align-items: center;">
+                <ion-icon [name]="link.icon" color="primary" style="font-size: 1.5rem; margin-right: 15px;"></ion-icon>
+                <span style="font-weight: 700;">{{ link.label }}</span>
+              </div>
+              <ion-icon name="app-open" size="small" color="medium"></ion-icon>
+            </div>
+          }
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>

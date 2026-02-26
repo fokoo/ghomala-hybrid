@@ -1,12 +1,38 @@
 
-/* Adaptive container: Full width on mobile, max 800px on desktop */
+/* 1. Layout & Containers */
 .responsive-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 800px; // Centers content on tablets/web
   margin: 0 auto;
-  padding-bottom: 30px;
+  padding-bottom: 50px;
 }
 
+/* 2. Trilingual Header & Search */
+ion-segment {
+  --background: rgba(0, 0, 0, 0.1);
+  width: 92%;
+  margin: 0 auto 10px;
+  
+  ion-segment-button {
+    --color: white;
+    --color-checked: var(--ion-color-primary);
+    --indicator-color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: none;
+  }
+}
+
+.custom-search {
+  --background: rgba(255, 255, 255, 0.15);
+  --color: white;
+  --placeholder-color: rgba(255, 255, 255, 0.7);
+  --icon-color: white;
+  --clear-button-color: white;
+  padding-bottom: 12px;
+}
+
+/* 3. Section Titles */
 .section-title {
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -16,65 +42,167 @@
   margin: 25px 16px 10px;
 }
 
-/* Make the category selector span the full width */
+/* 4. Topic Selector Box */
 .select-box {
   background: white;
   border-top: 1px solid #e0e0e0;
   border-bottom: 1px solid #e0e0e0;
   
-  ion-item {
+  ion-item { 
     --background: transparent;
     --padding-start: 16px;
     font-weight: 600;
+    font-size: 0.95rem;
   }
 }
 
-/* WIDE LIST LAYOUT - Edge-to-edge content */
+/* 5. Expandable Keyword List */
 .full-width-list {
   display: flex;
   flex-direction: column;
   background: white;
   border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+}
+
+.keyword-container {
+  background: white;
+  border-bottom: 1px solid #f2f2f2;
+  transition: background 0.3s ease;
+
+  &.expanded {
+    background: #fdfaf8; // Subtle warm highlight when open
+  }
 }
 
 .keyword-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 16px;
-  border-bottom: 1px solid #f0f0f0;
-  
-  &:last-child { border-bottom: none; }
-  &:active { background: #fafafa; }
+  padding: 16px;
+  cursor: pointer;
 
-  .word-ghomala {
+  &:active {
+    background: #f5f5f5;
+  }
+
+  .word-content {
+    flex: 1;
+    .word-ghomala {
+      display: block;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: #222;
+      margin-bottom: 2px;
+    }
+    .word-translation {
+      font-size: 0.9rem;
+      color: #666;
+      font-style: italic;
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    ion-button {
+      --padding-start: 8px;
+      --padding-end: 8px;
+      height: 40px;
+      margin: 0;
+      ion-icon { font-size: 1.5rem; }
+    }
+  }
+}
+
+/* 6. Examples (The Expanded Area) */
+.example-box {
+  padding: 0 16px 18px 16px;
+  animation: slideDown 0.25s ease-out;
+
+  .ex-gh {
+    font-size: 1rem;
+    color: #333;
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.4;
+    
+    strong {
+      color: var(--ion-color-primary);
+      font-weight: 800;
+      margin-right: 4px;
+    }
+  }
+
+  .ex-trans {
+    font-size: 0.85rem;
+    color: #8d6e63;
+    margin: 6px 0 0 0;
+    border-left: 2px solid #e0e0e0;
+    padding-left: 10px;
+  }
+}
+
+/* 7. Dedicated YouTube Learning Card */
+.youtube-section {
+  padding: 0 16px;
+}
+
+.youtube-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #ffcdd2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+
+  &:active { transform: scale(0.98); transition: 0.1s; }
+
+  ion-icon[name="app-youtube"] {
+    font-size: 2.8rem;
+    margin-right: 15px;
+  }
+
+  .yt-title {
     display: block;
     font-weight: 800;
+    font-size: 1.1rem;
     color: #333;
-    font-size: 1.3rem;
   }
-  .word-translation {
-    font-size: 0.95rem;
-    color: #777;
-  }
-}
-
-/* Useful Links List */
-.wide-link-list {
-  background: white;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
   
-  ion-item {
-    --padding-start: 16px;
-    h2 { font-weight: 700; color: #444; }
+  .yt-subtitle {
+    font-size: 0.8rem;
+    color: #d32f2f;
+    font-weight: 600;
   }
 }
 
+/* 8. Utility & Animations */
 .more-container {
   display: flex;
   justify-content: center;
-  margin-top: 15px;
-  ion-button { --color: #8d6e63; font-weight: 700; }
+  margin: 30px 0;
+  
+  ion-button {
+    --border-width: 2px;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 50px 20px;
+  color: #999;
+  
+  ion-icon { font-size: 3.5rem; margin-bottom: 10px; opacity: 0.5; }
+  p { font-weight: 500; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
