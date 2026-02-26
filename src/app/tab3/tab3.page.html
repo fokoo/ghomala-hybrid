@@ -1,17 +1,105 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title style="font-weight: 800;">{{ t().title }}</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar color="primary">
+    <ion-segment [value]="appLanguage()" (ionChange)="updateLanguage($event)" mode="ios">
+      <ion-segment-button value="fr">
+        <ion-label>Fr</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="en">
+        <ion-label>En</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content color="light">
+  <div class="responsive-container">
+    
+    <div class="hero-section">
+      <div class="hero-overlay">
+        <h1>{{ t().heroTitle }}</h1>
+        <p>{{ t().heroSub }}</p>
+      </div>
+    </div>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+    <ion-card class="cultural-card">
+      <ion-card-header>
+        <div class="card-top">
+          <ion-badge color="primary">Heritage</ion-badge>
+          <ion-icon name="app-history" color="primary"></ion-icon>
+        </div>
+        <ion-card-title>Ghɔmálá’</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ t().intro }}</p>
+        <div class="card-footer">
+          <ion-button fill="clear" (click)="isHistoryModalOpen.set(true)">
+            {{ t().historyBtn }}
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <ion-icon name="app-calendar"></ion-icon>
+        <span>{{ t().gridCal }}</span>
+      </div>
+      <div class="info-item">
+        <ion-icon name="app-map"></ion-icon>
+        <span>{{ t().gridLoc }}</span>
+      </div>
+    </div>
+
+    <ion-modal [isOpen]="isHistoryModalOpen()" (didDismiss)="isHistoryModalOpen.set(false)">
+      <ng-template>
+        <ion-header class="ion-no-border">
+          <ion-toolbar color="primary">
+            <ion-title>{{ t().modalTitle }}</ion-title>
+            <ion-button slot="end" fill="clear" (click)="isHistoryModalOpen.set(false)" style="--color: white;">
+              {{ t().close }}
+            </ion-button>
+          </ion-toolbar>
+        </ion-header>
+
+        <ion-content class="ion-padding">
+          <div class="info-text-wrapper">
+            <h2>Ghɔmálá’</h2>
+            
+            <section class="info-section">
+              <div class="section-header">
+                <ion-icon name="app-location" color="primary"></ion-icon>
+                <h3>{{ t().locationTitle }}</h3>
+              </div>
+              <p>{{ t().locDetail }}</p>
+              <p>{{ t().locGlobal }}</p>
+            </section>
+
+            <section class="info-section ion-margin-top">
+              <div class="section-header">
+                <ion-icon name="app-lang" color="primary"></ion-icon>
+                <h3>{{ t().dialectsTitle }}</h3>
+              </div>
+              <ul class="dialect-list">
+                @for (d of t().dialects; track d.region) {
+                  <li>
+                    <strong>{{ d.region }} :</strong> {{ d.towns }}
+                  </li>
+                }
+              </ul>
+            </section>
+
+            <div class="info-image-wrapper">
+              <img src="assets/images/ghomala-area.jpg" alt="Map" class="responsive-map">
+              <p class="map-caption">© Heritage Bamiléké</p>
+            </div>
+          </div>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+  </div>
 </ion-content>
