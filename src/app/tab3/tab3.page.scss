@@ -1,53 +1,146 @@
 
+// 1. Top Header & Segment Styling (Matches Tab 1/2)
+ion-toolbar {
+  --padding-start: 16px;
+  --padding-end: 8px;
+}
+
+.header-segment {
+  width: 100px;
+  min-height: 32px;
+  background: rgba(255, 255, 255, 0.2); // Semi-transparent to blend with primary color
+  border-radius: 8px;
+  margin-right: 4px;
+
+  ion-segment-button {
+    min-height: 28px;
+    --color: #ffffff;
+    --color-checked: var(--ion-color-primary);
+    --indicator-color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin: 2px;
+  }
+}
+
+ion-title {
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+// 2. Main Container & Hero
 .responsive-container {
-  width: 100%; max-width: 800px; margin: 0 auto; padding: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
 }
 
 .hero-section {
-  height: 160px;
+  height: 150px;
   background: linear-gradient(135deg, var(--ion-color-primary) 0%, #ad1457 100%);
-  border-radius: 20px; margin-bottom: 20px;
-  display: flex; align-items: flex-end; padding: 20px; color: white;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
   h1 { font-weight: 800; margin: 0; font-size: 1.6rem; }
+  p { margin: 5px 0 0 0; opacity: 0.8; font-size: 0.9rem; }
 }
 
+// 3. Cultural Cards
 .cultural-card {
-  margin: 0 0 15px 0; border-radius: 16px;
-  .card-top { display: flex; justify-content: space-between; ion-icon { font-size: 2rem; } }
-  ion-card-title { font-weight: 800; margin-top: 5px; }
-  .card-footer { display: flex; justify-content: flex-end; }
+  margin: 0 0 16px 0;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    ion-icon { font-size: 2rem; }
+  }
+
+  ion-card-title {
+    font-weight: 800;
+    color: #333;
+    font-size: 1.3rem;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
 }
 
+// 4. Info Grid
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+
+  .info-item {
+    background: white;
+    padding: 16px;
+    border-radius: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+
+    ion-icon { font-size: 1.5rem; color: var(--ion-color-primary); margin-bottom: 6px; }
+    span { font-weight: 700; font-size: 0.8rem; color: #444; }
+  }
+}
+
+// 5. Modal Styling
 .info-text-wrapper {
-  h2 { font-size: 2rem; font-weight: 800; color: var(--ion-color-primary); }
+  padding: 10px;
+  h2 { font-size: 2rem; font-weight: 800; color: var(--ion-color-primary); margin-bottom: 5px; }
   .intro-text { font-style: italic; color: #666; margin-bottom: 20px; }
-  
+
   .info-section {
-    background: #f9f9f9; padding: 15px; border-radius: 12px;
-    .section-header { display: flex; align-items: center; gap: 10px; h3 { margin: 0; font-weight: 700; } }
-    p { line-height: 1.5; color: #444; }
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      h3 { margin: 0; font-weight: 700; }
+    }
   }
 }
 
 .dialect-list {
-  list-style: none; padding: 0;
+  list-style: none;
+  padding: 0;
   li {
-    padding: 8px 0; border-bottom: 1px dashed #ddd; font-size: 0.9rem;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ddd;
+    font-size: 0.9rem;
     strong { color: var(--ion-color-primary); display: block; }
+    &:last-child { border-bottom: none; }
   }
 }
 
 .info-image-wrapper {
-  margin-top: 25px; text-align: center;
-  .responsive-map { width: 100%; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-  .map-caption { font-size: 0.8rem; color: #888; margin-top: 8px; }
-}
-
-.info-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-  .info-item {
-    background: white; padding: 15px; border-radius: 12px; text-align: center;
-    ion-icon { font-size: 1.5rem; color: var(--ion-color-primary); }
-    span { display: block; font-size: 0.8rem; font-weight: 600; margin-top: 5px; }
+  margin-top: 25px;
+  text-align: center;
+  .responsive-map { 
+    width: 100%; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+    border: 3px solid white;
   }
+  .map-caption { font-size: 0.8rem; color: #888; margin-top: 8px; }
 }

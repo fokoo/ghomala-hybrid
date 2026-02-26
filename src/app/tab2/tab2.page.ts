@@ -1,10 +1,9 @@
-
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, 
   IonItem, IonIcon, IonButton, IonSearchbar,
-  IonSelect, IonSelectOption, IonModal, IonSegment, IonSegmentButton, IonLabel
+  IonSelect, IonSelectOption, IonModal, IonButtons
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -12,7 +11,7 @@ import {
   helpCircleOutline, heartOutline, openOutline,
   chevronUp, chevronDown, listOutline, searchOutline,
   chevronForwardOutline, linkOutline, volumeHighOutline,
-  chatboxEllipsesOutline, languageOutline
+  chatboxEllipsesOutline, languageOutline, chevronDownOutline, chevronUpOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -20,10 +19,10 @@ import {
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
   standalone: true,
-  imports: [
+  imports: [ 
     CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, 
     IonItem, IonIcon, IonButton, IonSelect, IonSelectOption, 
-    IonModal, IonSearchbar, IonSegment, IonSegmentButton, IonLabel
+    IonModal, IonSearchbar, IonButtons
   ]
 })
 export class Tab2Page {
@@ -145,7 +144,9 @@ export class Tab2Page {
       'app-help': helpCircleOutline, 'app-heart': heartOutline, 'app-open': openOutline,
       'app-up': chevronUp, 'app-down': chevronDown, 'app-list': listOutline, 
       'app-search': searchOutline, 'app-forward': chevronForwardOutline, 'app-link': linkOutline,
-      'app-volume': volumeHighOutline, 'app-example': chatboxEllipsesOutline, 'app-lang': languageOutline
+      'app-volume': volumeHighOutline, 'app-example': chatboxEllipsesOutline, 'app-lang': languageOutline,
+      'chevron-down-outline': chevronDownOutline,
+      'chevron-up-outline': chevronUpOutline
     });
   }
 

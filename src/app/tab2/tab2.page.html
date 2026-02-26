@@ -1,20 +1,28 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-title style="font-weight: 800;">Ghómálá' Dico</ion-title>
+    <ion-title style="font-weight: 800;">
+      {{ appLanguage() === 'fr' ? "Gi'tə (Apprendre)" : "Gi'tə (Learn)" }}
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-select 
+        [value]="appLanguage()" 
+        (ionChange)="updateLanguage($event)"
+        interface="popover" 
+        toggleIcon="chevron-down-outline"
+        expandedIcon="chevron-up-outline"
+        class="lang-select-header">
+        <ion-select-option value="fr">Fr</ion-select-option>
+        <ion-select-option value="en">En</ion-select-option>
+      </ion-select>
+    </ion-buttons>
   </ion-toolbar>
 
   <ion-toolbar color="primary">
-    <ion-segment [value]="appLanguage()" (ionChange)="updateLanguage($event)" mode="ios">
-      <ion-segment-button value="fr">
-        <ion-label>Français</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="en">
-        <ion-label>English</ion-label>
-      </ion-segment-button>
-    </ion-segment>
     <ion-searchbar 
       [placeholder]="appLanguage() === 'fr' ? 'Rechercher...' : 'Search...'" 
       (ionInput)="handleSearch($event)"
+      mode="ios"
       class="custom-search">
     </ion-searchbar>
   </ion-toolbar>

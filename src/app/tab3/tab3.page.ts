@@ -5,13 +5,14 @@ import {
   IonHeader, IonToolbar, IonTitle, IonContent, 
   IonCard, IonCardHeader, IonCardTitle,
   IonCardContent, IonIcon, IonButton, IonBadge, IonModal,
-  IonSegment, IonSegmentButton, IonLabel
+  IonButtons, IonSelect, IonSelectOption
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
   libraryOutline, peopleOutline, earthOutline, 
   calendarOutline, mapOutline, colorPaletteOutline, 
-  closeOutline, locationOutline, languageOutline 
+  closeOutline, locationOutline, languageOutline, 
+  chevronDownOutline, chevronUpOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -23,16 +24,17 @@ import {
     CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, 
     IonCard, IonCardHeader, IonCardTitle, 
     IonCardContent, IonIcon, IonButton, IonBadge, IonModal,
-    IonSegment, IonSegmentButton, IonLabel
+    IonButtons, IonSelect, IonSelectOption, 
   ]
 })
 export class Tab3Page {
-  appLanguage = signal<'en' | 'fr'>('fr'); 
+  appLanguage = signal<'en' | 'fr'>('fr');
   isHistoryModalOpen = signal(false);
+  isTraditionModalOpen = signal(false);
 
   content = {
     fr: {
-      title: "Culture & Histoire",
+      title: "Mkɔ (Culture)",
       heroTitle: "Héritage Bamiléké",
       heroSub: "Voyage au cœur de la langue Ghɔmálá’",
       historyBtn: "En savoir plus",
@@ -50,10 +52,13 @@ export class Tab3Page {
         { region: "Nord", towns: "Fʉ'sap (Bafoussam), Ləŋ (Baleng)" },
         { region: "Sud", towns: "Tyə (Batié), Ngam (Bagam), Pa (Bapa), Dəŋkwop (Badenkop)" },
         { region: "Ouest", towns: "Mukɔm (Bameka), Muju (Bamendjou), Sʉɔ (Bansoa), Mugəm (Bamougoum), Fu'nda (Bafounda)" }
-      ]
+      ],
+      traditionsTitle: "Traditions & Rites",
+      traditionsIntro: "Le respect des ancêtres et les rites de passage.",
+      ritesDetail: "La culture Ghɔmálá’ est riche en cérémonies, notamment le 'Lali' (danse guerrière) et les rites funéraires qui célèbrent la vie.",
     },
     en: {
-      title: "Culture & History",
+      title: "Mkɔ (Culture)",
       heroTitle: "Bamiléké Heritage",
       heroSub: "Journey to the heart of Ghɔmálá’",
       historyBtn: "Learn More",
@@ -71,9 +76,13 @@ export class Tab3Page {
         { region: "North", towns: "Fʉ'sap (Bafoussam), Ləŋ (Baleng)" },
         { region: "South", towns: "Tyə (Batié), Ngam (Bagam), Pa (Bapa), Dəŋkwop (Badenkop)" },
         { region: "West", towns: "Mukɔm (Bameka), Muju (Bamendjou), Sʉɔ (Bansoa), Mugəm (Bamougoum), Fu'nda (Bafounda)" }
-      ]
+      ],
+      traditionsTitle: "Traditions & Rites",
+      traditionsIntro: "Ancestral respect and rites of passage.",
+      ritesDetail: "Ghɔmálá’ culture is rich in ceremonies, notably the 'Lali' (warrior dance) and funeral rites that celebrate life.",
     }
   };
+
 
   t = computed(() => this.content[this.appLanguage()]);
 
@@ -87,12 +96,15 @@ export class Tab3Page {
       'app-calendar': calendarOutline,
       'app-close': closeOutline,
       'app-location': locationOutline,
-      'app-lang': languageOutline
+      'app-lang': languageOutline,
+      'app-chevron-down': chevronDownOutline,
+      'app-chevron-up': chevronUpOutline,
+      'close-outline': closeOutline
     });
   }
 
   updateLanguage(event: any) {
-    const val = event.detail.value as 'en' | 'fr';
+    const val = event.detail.value;
     if (val) this.appLanguage.set(val);
   }
 }

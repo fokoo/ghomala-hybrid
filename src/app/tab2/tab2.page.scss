@@ -7,6 +7,35 @@
   padding-bottom: 50px;
 }
 
+
+.lang-select-header {
+  --placeholder-color: white;
+  --color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-right: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding-inline-start: 10px;
+  min-height: 30px;
+
+  &::part(icon) {
+    color: white !important;
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  &::part(text) {
+    padding-top: 1px;
+  }
+}
+
+ion-title {
+  font-size: 1.1rem;
+  padding-inline-end: 0;
+}
+
+
 /* 2. Trilingual Header & Search */
 ion-segment {
   --background: rgba(0, 0, 0, 0.1);
@@ -206,3 +235,4 @@ ion-segment {
   from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: translateY(0); }
 }
+

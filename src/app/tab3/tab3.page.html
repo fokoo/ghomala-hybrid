@@ -1,18 +1,19 @@
-
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-title style="font-weight: 800;">{{ t().title }}</ion-title>
-  </ion-toolbar>
-
-  <ion-toolbar color="primary">
-    <ion-segment [value]="appLanguage()" (ionChange)="updateLanguage($event)" mode="ios">
-      <ion-segment-button value="fr">
-        <ion-label>Fr</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="en">
-        <ion-label>En</ion-label>
-      </ion-segment-button>
-    </ion-segment>
+    
+    <ion-buttons slot="end">
+      <ion-select 
+        [value]="appLanguage()" 
+        (ionChange)="updateLanguage($event)"
+        interface="popover" 
+        toggleIcon="app-chevron-down"
+        expandedIcon="app-chevron-up"
+        class="lang-select">
+        <ion-select-option value="fr">Fr</ion-select-option>
+        <ion-select-option value="en">En</ion-select-option>
+      </ion-select>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -44,6 +45,24 @@
       </ion-card-content>
     </ion-card>
 
+    <ion-card class="cultural-card">
+  <ion-card-header>
+    <div class="card-top">
+      <ion-badge color="success">Culture</ion-badge>
+      <ion-icon name="app-culture" color="success"></ion-icon>
+    </div>
+    <ion-card-title>{{ t().traditionsTitle }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{ t().traditionsIntro }}</p>
+    <div class="card-footer">
+      <ion-button fill="clear" (click)="isTraditionModalOpen.set(true)">
+        {{ t().historyBtn }}
+      </ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>
+
     <div class="info-grid">
       <div class="info-item">
         <ion-icon name="app-calendar"></ion-icon>
@@ -61,7 +80,7 @@
           <ion-toolbar color="primary">
             <ion-title>{{ t().modalTitle }}</ion-title>
             <ion-button slot="end" fill="clear" (click)="isHistoryModalOpen.set(false)" style="--color: white;">
-              {{ t().close }}
+              <ion-icon name="close-outline"></ion-icon>
             </ion-button>
           </ion-toolbar>
         </ion-header>
@@ -101,5 +120,26 @@
         </ion-content>
       </ng-template>
     </ion-modal>
+
+    <ion-modal [isOpen]="isTraditionModalOpen()" (didDismiss)="isTraditionModalOpen.set(false)">
+  <ng-template>
+    <ion-header class="ion-no-border">
+      <ion-toolbar color="primary">
+        <ion-title>{{ t().traditionsTitle }}</ion-title>
+        <ion-button slot="end" fill="clear" (click)="isTraditionModalOpen.set(false)" style="--color: white;">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <div class="info-text-wrapper">
+        <section class="info-section">
+          <p>{{ t().ritesDetail }}</p>
+        </section>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
   </div>
 </ion-content>
